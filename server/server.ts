@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 import ImportData from "./importData";
+import { errorHandler, notFound } from "./middleware/ErrorMiddleware";
+
 
 dotenv.config();
 const app = express();
@@ -23,6 +25,13 @@ mongoose
 
   //API
   app.use("/api/import", ImportData);
+  
+
+
+// ERROR HANDLER
+app.use(notFound);
+app.use(errorHandler);
+
 
   app.listen(PORT, () => {
     console.log(`server is listening on ${PORT}`)

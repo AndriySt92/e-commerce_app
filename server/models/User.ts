@@ -1,11 +1,13 @@
 import { model, Schema } from 'mongoose'
 import bcrypt from 'bcryptjs'
 
-export interface IUserSchema {
+export interface IUserSchema{
+  _id?: string
   name: string
   email: string
   password: string
   isAdmin?: boolean
+  createdAt?: Date
 }
 
 const UserSchema = new Schema<IUserSchema>(
