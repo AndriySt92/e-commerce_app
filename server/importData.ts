@@ -1,5 +1,5 @@
 import express from 'express'
-import { UserModel } from './models/User'
+import { User } from './models/User'
 import { users } from './data/users'
 import { ProductModel } from './models/Product'
 import { products } from './data/product'
@@ -10,8 +10,8 @@ const ImportData = express.Router()
 ImportData.post(
   '/user',
   asyncHandler(async (_, res: express.Response) => {
-    await UserModel.deleteMany({})
-    const importUser = await UserModel.insertMany(users)
+    await User.deleteMany({})
+    const importUser = await User.insertMany(users)
     res.send({ importUser })
   }),
 )
@@ -19,7 +19,7 @@ ImportData.post(
 ImportData.post(
   '/products',
   asyncHandler(async (_, res: express.Response) => {
-    await UserModel.deleteMany({})
+    await User.deleteMany({})
     const importProducts = await ProductModel.insertMany(products)
     res.send({ importProducts })
   }),

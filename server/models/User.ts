@@ -1,7 +1,8 @@
-import { model, Schema } from 'mongoose'
+import mongoose from 'mongoose'
+import { model,  Schema } from 'mongoose'
 import bcrypt from 'bcryptjs'
 
-export interface IUserSchema{
+export interface IUserSchema {
   _id?: string
   name: string
   email: string
@@ -48,4 +49,6 @@ UserSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt)
 })
 
-export const UserModel = model<IUserSchema>('User', UserSchema)
+export const User = mongoose.models.User || model<IUserSchema>("User", UserSchema);
+
+

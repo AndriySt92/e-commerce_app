@@ -1,7 +1,7 @@
 import express from 'express'
-import jwt from "jsonwebtoken";
+import jwt, { Secret } from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
-import {IUserSchema, UserModel} from "../models/User";
+import {User, IUserSchema} from "../models/User";
 
 export interface IGetUserAuthInfoRequest extends express.Request {
     user: IUserSchema
@@ -17,9 +17,9 @@ const protect = asyncHandler(async (req: express.Request, res: express.Response,
     try {
       token = req.headers.authorization.split(" ")[1];
 
-      const decoded = jwt.verify(token, process.env.SECRET_KEY as string);
-    //@ts-ignore
-      req.user = await UserModel.findById(decoded.id).select("-password");
+      const decoded = jwt.verify(token, process.env.SECRET_KEY as Secret);
+      //@ts-ignore
+      req.user = await User.findById(decoded.id).select("-password") ;
       next();
     } catch (error) {
       console.error(error);
@@ -33,7 +33,7 @@ const protect = asyncHandler(async (req: express.Request, res: express.Response,
   }
 });
 
-const admin = (req: IGetUserAuthInfoRequest, res: express.Response, next: express.NextFunction) => {
+const admin = (req: express.Request, res: express.Response, next: express.NextFunction) => {
   //@ts-ignore
   if (req.user && req.user.isAdmin) {
     next();
