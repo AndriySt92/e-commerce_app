@@ -5,6 +5,7 @@ import ImportData from './importData'
 import { errorHandler, notFound } from './middleware/ErrorMiddleware'
 import userRoute from './routes/userRouter'
 import orderRoute from './routes/orderRouter'
+import productRoute from './routes/productRouter'
 
 dotenv.config()
 const app = express()
@@ -30,6 +31,7 @@ mongoose
 app.use('/api/import', ImportData)
 app.use('/api/users', userRoute)
 app.use('/api/orders', orderRoute)
+app.use('/api/producs', productRoute)
 
 // ERROR HANDLER
 app.use(notFound)

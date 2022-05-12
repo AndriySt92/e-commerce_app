@@ -1,7 +1,7 @@
-import { model, Schema, Types } from 'mongoose'
+import { model, Schema, Types, Document } from 'mongoose'
 
 
-export interface IReviewSchema {
+export interface IReviewSchema extends Document {
     name: string
     rating: number
     comment: string
@@ -71,6 +71,6 @@ const ProductSchema = new Schema<IProductSchema>(
   { timestamps: true, toJSON: { virtuals: true } },
 );
 
-export const ProductModel = model<IProductSchema>("Product", ProductSchema);
+export const Product = model<IProductSchema>("Product", ProductSchema);
 
  

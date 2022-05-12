@@ -1,7 +1,7 @@
 import express from 'express'
 import { User } from './models/User'
 import { users } from './data/users'
-import { ProductModel } from './models/Product'
+import { Product } from './models/Product'
 import { products } from './data/product'
 import asyncHandler from 'express-async-handler'
 
@@ -20,7 +20,7 @@ ImportData.post(
   '/products',
   asyncHandler(async (_, res: express.Response) => {
     await User.deleteMany({})
-    const importProducts = await ProductModel.insertMany(products)
+    const importProducts = await Product.insertMany(products)
     res.send({ importProducts })
   }),
 )
