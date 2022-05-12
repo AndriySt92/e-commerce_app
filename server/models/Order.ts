@@ -1,4 +1,4 @@
-import { model, Schema, Types } from 'mongoose'
+import { model, Schema, Types, Document } from 'mongoose'
 
 interface IOrderItems {
   name: string
@@ -22,7 +22,7 @@ interface IPaymentResult {
   email_address: string
 }
 
-interface IOrderSchema {
+interface IOrderSchema extends Document {
   user: Types.ObjectId
   orderItems: Array<IOrderItems>
   shippingAddress: IShippingAddress
@@ -32,9 +32,9 @@ interface IOrderSchema {
   shippingPrice: number
   totalPrice: number
   isPaid: boolean
-  paidAt: Date
+  paidAt: number
   isDelivered: boolean
-  deliveredAt: Date
+  deliveredAt: number
 }
 
 const orderSchema = new Schema<IOrderSchema>(
@@ -95,7 +95,7 @@ const orderSchema = new Schema<IOrderSchema>(
       default: false,
     },
     paidAt: {
-      type: Date,
+      type: Number,
     },
     isDelivered: {
       type: Boolean,
@@ -103,7 +103,7 @@ const orderSchema = new Schema<IOrderSchema>(
       default: false,
     },
     deliveredAt: {
-      type: Date,
+      type: Number,
     },
   },
   {

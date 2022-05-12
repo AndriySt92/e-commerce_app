@@ -4,6 +4,7 @@ import mongoose, { ConnectOptions } from 'mongoose'
 import ImportData from './importData'
 import { errorHandler, notFound } from './middleware/ErrorMiddleware'
 import userRoute from './routes/userRouter'
+import orderRoute from './routes/orderRouter'
 
 dotenv.config()
 const app = express()
@@ -28,6 +29,7 @@ mongoose
 //API
 app.use('/api/import', ImportData)
 app.use('/api/users', userRoute)
+app.use('/api/orders', orderRoute)
 
 // ERROR HANDLER
 app.use(notFound)
