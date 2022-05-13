@@ -38,7 +38,7 @@ router.post(
       totalPrice,
     })
 
-    const createOrder = order.save()
+    const createOrder =await order.save()
 
     res.status(201).json(createOrder)
   }),
@@ -49,8 +49,8 @@ router.get(
   '/:id',
   protect,
   asyncHandler(async (req: express.Request, res: express.Response) => {
-    const order = Order.findById(req.params.id).populate('user', 'name email')
-
+    const order = await Order.findById(req.params.id) 
+    
     if (!order) {
       res.status(404)
       throw new Error('Order Not Found')
@@ -62,25 +62,23 @@ router.get(
 
 // ADMIN GET ALL ORDERS
 router.get(
-  "/all",
+  "/",
   protect,
   admin,
   asyncHandler(async (_, res: express.Response) => {
-    const orders = await Order.find({})
-      .sort({ _id: -1 })
-      .populate("user", "id name email");
+    const orders = await Order.find({}).sort({ _id: -1 });
     res.json(orders);
   })
 );
 
 // USER LOGIN ORDERS
 router.get(
-  "/",
+  "/myOrders/:userId",
   protect,
   asyncHandler(async (req: express.Request, res: express.Response) => {
-    //@ts-ignore
-    const order = await Order.find({ user: req.user._id }).sort({ _id: -1 });
-    res.json(order);
+    const orders = await Order.find({"user": req.params.userId}).sort({ _id: -1 })
+    .populate("user", "id name email");
+    res.json(orders)
   })
 );
 
