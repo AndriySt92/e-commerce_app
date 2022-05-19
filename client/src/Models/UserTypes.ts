@@ -18,6 +18,6 @@ export interface IRegisterFormData extends ILoginFormData {
 
 export interface IUpdateProfileFormData {
     name?: string
-    email: string
-    password: string
+    email?: string
+    password?: string
 }
