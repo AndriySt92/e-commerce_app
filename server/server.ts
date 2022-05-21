@@ -31,7 +31,7 @@ mongoose
 app.use('/api/import', ImportData)
 app.use('/api/users', userRoute)
 app.use('/api/orders', orderRoute)
-app.use('/api/producs', productRoute)
+app.use('/api/products', productRoute)
 
 // ERROR HANDLER
 app.use(notFound)
