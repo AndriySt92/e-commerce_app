@@ -5,7 +5,7 @@ import { getToken } from '../../helpers/getToken'
 import { IGetProductsResponse, IProduct, IReviewFormData } from '../../Models/ProductTypes'
 import { logout } from './userSlice'
 
-export interface IUserState {
+export interface IProductState {
   products: Array<IProduct> | null
   productDetails: IProduct | null
   currentPage: number
@@ -15,7 +15,7 @@ export interface IUserState {
   error: string
 }
 
-const initialState: IUserState = {
+const initialState: IProductState = {
   products: null,
   productDetails: null,
   currentPage: 1,
