@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose, { ConnectOptions } from "mongoose";
 import cors from 'cors';
 import userRouter from './routes/userRouter'
+import orderRouter from './routes/orderRouter'
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ mongoose
   })
 
   app.use('/api/users', userRouter)
+  app.use('/api/orders', orderRouter)
 
   app.listen(PORT, () => {
     console.log(`server is listening on ${PORT}`)
