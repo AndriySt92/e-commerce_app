@@ -1,5 +1,6 @@
 import { Schema } from 'mongoose'
 import { JwtPayload } from 'jsonwebtoken';
+import { Request } from 'express';
 
 // Auth types
 export interface ILogin {
@@ -29,6 +30,11 @@ export interface IUser {
     phone: string,
     shippingAddress?: IShippingAddress
     orders?: Schema.Types.ObjectId[]
+    isAdmin?: Boolean
     token: JwtPayload | string
     createdAt: Date 
 }
+
+export interface IGetUserAuthInfoRequest extends Request {
+    user: IUser
+  }
